@@ -22,6 +22,14 @@ module SimpleRecord
       objects
     end
 
+    def self.create(params)
+      File.open(@path, "a") do |f|
+        f << params.to_json
+        f << "\n"
+      end
+      last 
+    end
+
     def self.find(id)
       file = File.open(@path)
       data = file.read
@@ -40,6 +48,10 @@ module SimpleRecord
 
     def self.first
       self.all.first
+    end
+
+    def delete
+      #TODO
     end
 
     def inspect
