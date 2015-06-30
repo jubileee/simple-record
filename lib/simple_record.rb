@@ -34,6 +34,20 @@ module SimpleRecord
       end
     end
 
+    def self.last
+      self.all.last
+    end
+
+    def self.first
+      self.all.first
+    end
+
+    def inspect
+      first_part = super.split(" ").first.split(":").first + " "
+      second_part = super.split(" ")[1..-1].join(" ").gsub!("@", "").gsub!("=", ": ")
+      first_part + second_part
+    end
+
   end
 
 end
