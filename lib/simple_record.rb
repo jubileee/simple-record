@@ -21,7 +21,19 @@ module SimpleRecord
       data.split("\n").each {|j| objects << new(JSON.parse(j))}
       objects
     end
-    
+
+    def self.find(id)
+      file = File.open(@path)
+      data = file.read
+      file.close
+      data.split("\n").each do |record|
+        record = JSON.parse(record)
+        if record["id"] == id
+          return new(record)
+        end
+      end
+    end
+
   end
 
 end
