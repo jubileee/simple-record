@@ -5,7 +5,7 @@ module SimpleRecord
 
   class Entity
 
-    class << self
+    class << self # attr_accessor for class variable
       attr_accessor :path 
     end
 
@@ -51,7 +51,9 @@ module SimpleRecord
     end
 
     def delete
-      #TODO
+      # TODO
+      # Since our data stored in file it seems difficult to delete 
+      # exact line especially without any schema. Anyway I'll found solution later
     end
 
     def inspect

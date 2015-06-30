@@ -1,8 +1,6 @@
 # SimpleRecord
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/simple_record`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Simple ActiveRecord implementation. It uses file system as a storage.
 
 ## Installation
 
@@ -22,18 +20,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Here is example:
 
-## Development
+```ruby
+require "simple_record"
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+class User < SimpleRecord::Entity
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+  @path = "local/users.json" #you have to specify path to file
 
-## Contributing
+  attr_accessor :id, :name, :city
 
-1. Fork it ( https://github.com/[my-github-username]/simple_record/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+  def initialize(params)
+    @id = params["id"]
+    @name = params["name"]
+    @city = params["city"]
+  end
+
+end
+```
+
+Now you can do:
+
+```ruby
+User.all
+User.create({id: 1, name: "Peter", age: 18})
+User.find(1) #find by id
+```
